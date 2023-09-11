@@ -18,11 +18,13 @@ const Hero = () => {
             Reserve a table
           </Link>
         </div>
-        <img 
-          className="hero-image" 
-          src={restaurantFoodImage} 
-          alt="Restaurant food" 
-        />
+        <div className="hero-img">
+          <img 
+            className="hero-image" 
+            src={restaurantFoodImage} 
+            alt="Restaurant food" 
+          />
+        </div>
       </div>
     </section>
   );

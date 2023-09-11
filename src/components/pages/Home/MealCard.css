@@ -10,8 +10,22 @@
   background-color: #EDEFEE;
 }
 
+.hero-img img {
+  transition: all ease-in-out 0.3s;
+}
+
+.hero-img:hover img {
+  transform: scale(0.95);
+}
+
 .meal-card:hover .meal-card-image img {
   transform: scale(1.1);
+}
+
+.meal-card-image {
+  overflow: hidden;
+  padding-bottom: 60%;
+  height: 0;
 }
 
 .meal-card-image img {
@@ -24,6 +38,7 @@
 
 .meal-card-header, 
 .meal-card-body-footer {
+  padding-top: 1rem;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
