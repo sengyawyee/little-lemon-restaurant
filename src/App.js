@@ -1,89 +1,47 @@
-import './App.css';
-import { useState, useEffect, React } from 'react';
-import { Navbar, Header, Main, Footer, Reservations, OrderOnline } from './components';
-import {Routes, Route, useLocation  } from "react-router-dom";
-import { headerData, reservationData, orderOnline } from './constants';
-import DataContext from './DataContext';
-import ConfirmedBooking from './components/Reservations/ConfirmedBooking';
+import {
+  Route, 
+  Routes
+} from 'react-router-dom';
+import pages from './utils/pages';
+import Layout from './components/layout/Layout';
+import Home from './components/pages/Home';
+import Bookings from './components/pages/Bookings';
+import ConfirmedBooking from './components/pages/Bookings/ConfirmedBooking';
+import NotFound from './components/pages/NotFound';
+import UnderConstruction from './components/pages/UnderConstruction';
 
-function App() {
-// use state to set data
-// use effect to get path
-  const location = useLocation();
-  const [path, setPath] = useState(location.pathname);
-
-  // set path name on route change
-  useEffect(()=> {
-    setPath(location.pathname);
-  }, [location.pathname]);
-
-
-    // Send data to header to based on route
-    let data = {};
-    if(path === '/' || path === '/Little-Lemon') {
-
-      data = headerData;
-
-    } else if (path === '/Reservations') {
-
-      data = reservationData;
-
-    } else if (path === '/OrderOnline') {
-
-      data = orderOnline;
-
-    }
-
-    
+const App = () => {
   return (
-      <>
-      
-          <Navbar />
-            <DataContext.Provider value={data}>
-                <Routes>
-                  <Route path='/Little-Lemon' element ={ 
-                    <>
-
-                      <Header />
-                      <Main />
-
-
-                    </>
-                  } />                  
-                  <Route path='/' element ={ 
-                    <>
-
-                      <Header />
-                      <Main />
-
-
-                    </>
-                  } />
-                  <Route path='/Reservations' element={
-                    <>
-
-                      <Header />
-                      <Reservations />
-
-                        
-                    </>
-                  } />
-                  <Route path='/OrderOnline' element={
-                    <>
-                      <Header />
-                      <OrderOnline />  
-                    </>
-                  } />                  
-
-                  {/* Path for booking confirmation */}
-                  <Route path='/ConfirmedBooking' element={<ConfirmedBooking/>}/>
-
-                </Routes>
-            </DataContext.Provider>
-          <Footer />
-
-      </>
+    <>
+      <Layout>
+        <Routes>
+          <Route path={pages.get('home').path} element={<Home />} />
+          <Route 
+            path={pages.get('about').path} 
+            element={<UnderConstruction />} 
+          />
+          <Route 
+            path={pages.get('menu').path} 
+            element={<UnderConstruction />} 
+          />
+          <Route path={pages.get('bookings').path} element={<Bookings />} />
+          <Route 
+            path={pages.get('confirmedBooking').path} 
+            element={<ConfirmedBooking />} 
+          />
+          <Route 
+            path={pages.get('orderOnline').path} 
+            element={<UnderConstruction />} 
+          />
+          <Route 
+            path={pages.get('login').path} 
+            element={<UnderConstruction />} 
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
+    </>
   );
-}
+};
 
 export default App;
